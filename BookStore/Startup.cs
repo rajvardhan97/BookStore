@@ -63,6 +63,12 @@ namespace BookStore
                 });
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminiRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireUserRole", policy => policy.RequireRole("User"));
+            });
+
             services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -84,6 +90,11 @@ namespace BookStore
 
             services.AddTransient<IUserRL, UserRL>();
             services.AddTransient<IUserBL, UserBL>();
+
+            services.AddTransient<IAdminRL, AdminRL>();
+            services.AddTransient<IAdminBL, AdminBL>();
+
+            
 
         }
 
