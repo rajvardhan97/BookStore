@@ -75,8 +75,9 @@ namespace RepositoryLayer.Service
                     SqlCommand command = new SqlCommand("dbo.Login", sqlConnection);
                     command.CommandType = CommandType.StoredProcedure;
 
+                    var encrpt = EncryptPassword(loginModel.Password);
                     command.Parameters.AddWithValue("@EmailId", loginModel.EmailId);
-                    command.Parameters.AddWithValue("@Password", loginModel.Password);
+                    command.Parameters.AddWithValue("@Password", encrpt);
 
                     SqlDataReader reader = command.ExecuteReader();
 
@@ -85,12 +86,12 @@ namespace RepositoryLayer.Service
                         while (reader.Read())
                         {
                             registerModel.UserId = Convert.ToInt32(reader["UserId"] == DBNull.Value ? default : reader["UserId"]);
-                            var password = Convert.ToString(reader["Password"] == DBNull.Value ? default : reader["Password"]);
-                            //registerModel.Password = Convert.ToString(reader["Password"] == DBNull.Value ? default : reader["Password"]);
+                            //var password = Convert.ToString(reader["Password"] == DBNull.Value ? default : reader["Password"]);
+                            registerModel.Password = Convert.ToString(reader["Password"] == DBNull.Value ? default : reader["Password"]);
                             registerModel.EmailId = Convert.ToString(reader["EmailId"] == DBNull.Value ? default : reader["EmailId"]);
 
-                            var decryptPassword = DecryptPassword(password);
-                            if (decryptPassword == loginModel.Password)
+                            //var decryptPassword = DecryptPassword(password);
+                            if (encrpt == registerModel.Password)
                             {
                                 return registerModel;
                             }

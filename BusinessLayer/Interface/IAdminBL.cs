@@ -7,6 +7,6 @@ namespace BusinessLayer.Interface
 {
     public interface IAdminBL
     {
-        public AdminModel Login(AdminLoginModel loginModel);
+        public string Login(AdminLoginModel loginModel);
     }
 }

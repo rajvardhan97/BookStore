@@ -15,7 +15,7 @@ namespace BusinessLayer.Service
             this.adminRL = adminRL;
         }
 
-        public AdminModel Login(AdminLoginModel loginModel)
+        public string Login(AdminLoginModel loginModel)
         {
             try
             {

@@ -94,7 +94,8 @@ namespace BookStore
             services.AddTransient<IAdminRL, AdminRL>();
             services.AddTransient<IAdminBL, AdminBL>();
 
-            
+            services.AddTransient<IBooksRL, BooksRL>();
+            services.AddTransient<IBooksBL, BooksBL>();
 
         }
 
