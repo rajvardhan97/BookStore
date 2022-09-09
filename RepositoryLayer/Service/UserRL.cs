@@ -62,7 +62,7 @@ namespace RepositoryLayer.Service
             }
         }
 
-        public UserRegisterModel Login(LoginModel loginModel)
+        public string Login(LoginModel loginModel)
         {
             UserRegisterModel registerModel = new UserRegisterModel();
             sqlConnection = new SqlConnection(configuration.GetConnectionString("BookStore"));
@@ -86,14 +86,13 @@ namespace RepositoryLayer.Service
                         while (reader.Read())
                         {
                             registerModel.UserId = Convert.ToInt32(reader["UserId"] == DBNull.Value ? default : reader["UserId"]);
-                            //var password = Convert.ToString(reader["Password"] == DBNull.Value ? default : reader["Password"]);
                             registerModel.Password = Convert.ToString(reader["Password"] == DBNull.Value ? default : reader["Password"]);
                             registerModel.EmailId = Convert.ToString(reader["EmailId"] == DBNull.Value ? default : reader["EmailId"]);
 
-                            //var decryptPassword = DecryptPassword(password);
                             if (encrpt == registerModel.Password)
                             {
-                                return registerModel;
+                                var token = GenerateSecurityToken(registerModel.EmailId, registerModel.UserId);
+                                return token;
                             }
                         }
                     }

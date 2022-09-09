@@ -154,7 +154,7 @@ namespace RepositoryLayer.Service
                 {
                     sqlConnection.Open();
 
-                    SqlCommand sqlCommand = new SqlCommand("dbo.GetAllBook", sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand("dbo.GetAllBooks", sqlConnection);
                     sqlCommand.CommandType = CommandType.StoredProcedure;
 
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -225,17 +225,27 @@ namespace RepositoryLayer.Service
 
         public static BookModel GetBookDetails(BookModel bookModel, SqlDataReader sqlDataReader)
         {
+            bookModel.BookId = Convert.ToInt32(sqlDataReader["BookId"] == DBNull.Value ? default : sqlDataReader["BookId"]);
+            bookModel.BookName = Convert.ToString(sqlDataReader["BookName"] == DBNull.Value ? default : sqlDataReader["BookName"]);
+            bookModel.AuthorName = Convert.ToString(sqlDataReader["AuthorName"] == DBNull.Value ? default : sqlDataReader["AuthorName"]);
+            bookModel.Description = Convert.ToString(sqlDataReader["Description"] == DBNull.Value ? default : sqlDataReader["Description"]);
+            bookModel.Quantity = Convert.ToInt32(sqlDataReader["Quantity"] == DBNull.Value ? default : sqlDataReader["Quantity"]);
+            bookModel.TotalRating = Convert.ToInt64(sqlDataReader["TotalRating"] == DBNull.Value ? default : sqlDataReader["TotalRating"]);
+            bookModel.Rating = Convert.ToInt64(sqlDataReader["Rating"] == DBNull.Value ? default : sqlDataReader["Rating"]);
+            bookModel.OriginalPrice = Convert.ToInt32(sqlDataReader["OriginalPrice"] == DBNull.Value ? default : sqlDataReader["OriginalPrice"]);
+            bookModel.DiscountPrice = Convert.ToInt32(sqlDataReader["DiscountPrice"] == DBNull.Value ? default : sqlDataReader["DiscountPrice"]);
+            bookModel.BookImage = Convert.ToString(sqlDataReader["BookImage"] == DBNull.Value ? default : sqlDataReader["BookImage"]);
 
-            bookModel.BookId = sqlDataReader.GetInt32(1);
-            bookModel.BookName = sqlDataReader["BookName"].ToString();
-            bookModel.AuthorName = sqlDataReader["AuthorName"].ToString();
-            bookModel.Description = sqlDataReader["Description"].ToString();
-            bookModel.Quantity = Convert.ToInt32(sqlDataReader["Quantity"]);
-            bookModel.TotalRating = Convert.ToInt64(sqlDataReader["TotalRating"]);
-            bookModel.Rating = Convert.ToInt64(sqlDataReader["Rating"]);
-            bookModel.OriginalPrice = Convert.ToInt32(sqlDataReader["OriginalPrice"]);
-            bookModel.DiscountPrice = Convert.ToInt32(sqlDataReader["DiscountPrice"]);
-            bookModel.BookImage = sqlDataReader["BookImage"].ToString();
+            //bookModel.BookId = sqlDataReader.GetInt32(1);
+            //bookModel.BookName = sqlDataReader["BookName"].ToString();
+            //bookModel.AuthorName = sqlDataReader["AuthorName"].ToString();
+            //bookModel.Description = sqlDataReader["Description"].ToString();
+            //bookModel.Quantity = Convert.ToInt32(sqlDataReader["Quantity"]);
+            //bookModel.TotalRating = Convert.ToInt64(sqlDataReader["TotalRating"]);
+            //bookModel.Rating = Convert.ToInt64(sqlDataReader["Rating"]);
+            //bookModel.OriginalPrice = Convert.ToInt32(sqlDataReader["OriginalPrice"]);
+            //bookModel.DiscountPrice = Convert.ToInt32(sqlDataReader["DiscountPrice"]);
+            //bookModel.BookImage = sqlDataReader["BookImage"].ToString();
 
             return bookModel;
         }

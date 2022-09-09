@@ -8,7 +8,7 @@ namespace RepositoryLayer.Interface
     public interface IUserRL
     {
         public bool Register(UserRegisterModel userRegister);
-        public UserRegisterModel Login(LoginModel loginModel);
+        public string Login(LoginModel loginModel);
         public string ForgotPassword(string emailId);
         public string ResetPassword(ResetModel resetModel);
     }
