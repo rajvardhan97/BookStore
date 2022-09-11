@@ -62,7 +62,7 @@ namespace BookStore.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("GetAllAddress")]
         public IActionResult GetAllAddress()
         {
             try

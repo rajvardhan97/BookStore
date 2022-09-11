@@ -236,17 +236,6 @@ namespace RepositoryLayer.Service
             bookModel.DiscountPrice = Convert.ToInt32(sqlDataReader["DiscountPrice"] == DBNull.Value ? default : sqlDataReader["DiscountPrice"]);
             bookModel.BookImage = Convert.ToString(sqlDataReader["BookImage"] == DBNull.Value ? default : sqlDataReader["BookImage"]);
 
-            //bookModel.BookId = sqlDataReader.GetInt32(1);
-            //bookModel.BookName = sqlDataReader["BookName"].ToString();
-            //bookModel.AuthorName = sqlDataReader["AuthorName"].ToString();
-            //bookModel.Description = sqlDataReader["Description"].ToString();
-            //bookModel.Quantity = Convert.ToInt32(sqlDataReader["Quantity"]);
-            //bookModel.TotalRating = Convert.ToInt64(sqlDataReader["TotalRating"]);
-            //bookModel.Rating = Convert.ToInt64(sqlDataReader["Rating"]);
-            //bookModel.OriginalPrice = Convert.ToInt32(sqlDataReader["OriginalPrice"]);
-            //bookModel.DiscountPrice = Convert.ToInt32(sqlDataReader["DiscountPrice"]);
-            //bookModel.BookImage = sqlDataReader["BookImage"].ToString();
-
             return bookModel;
         }
     }
